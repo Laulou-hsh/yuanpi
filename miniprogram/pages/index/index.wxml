@@ -1,0 +1,22 @@
+<wxs module="tool" src="../../utils/tool.wxs"></wxs>
+<view class="container">
+  <swiper class="swiper" indicator-dots="true" indicator-color="rgba(0,0,0,.1)" autoplay="auto" 
+    current="0" interval="5000" duration="500" circular="true">
+    <swiper-item class="swiper-item" wx:for="{{swiperData}}" wx:key="id">
+      <image class="swiper-img" src="{{item.img}}" mode="aspectFit" lazy-load="{{true}}"/>
+    </swiper-item>
+  </swiper>
+  <view class="news-content">
+    <view 
+      class="news" 
+      wx:for="{{newsData}}" 
+      wx:key="id"
+      bind:tap="toInsideInformation" 
+      data-news="{{item}}"
+    >
+      <image class="news-img" src="{{item.banner}}" mode="aspectFill" />
+      <view class="news-title">{{item.title}}</view>
+      <view class="news-date">{{tool.dateFormat(item.date, 'YYYY-MM-dd hh:mm')}}</view>
+    </view>
+  </view>
+</view>

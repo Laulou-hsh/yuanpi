@@ -1,0 +1,10 @@
+<view class="container">
+  <image class="banner" src="{{content.banner}}" mode="center"/>
+  <view class="title">{{content.title}}</view>
+  <view class="messages">
+    <view class="msg" wx:for="{{content.message}}" wx:key="index">
+      <view class="description">{{item.description}}</view>
+      <image class="msg-img" src="{{item.img}}" mode="aspectFit" catch:tap="previewImage" data-img="{{item.img}}"/>
+    </view>
+  </view>
+</view>

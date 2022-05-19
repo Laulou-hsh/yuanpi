@@ -1,0 +1,47 @@
+.navbar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 999999;
+  transition: all 300ms ease-out 0s;
+}
+
+.fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99999;
+}
+
+.title {
+  width: 390rpx;
+  font-size: 17px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 24px;
+}
+
+.back-icon {
+  position: absolute;
+  left: 20rpx;
+  width: 64rpx;
+  height: 64rpx;
+}
+.back-icon.white {
+  filter: invert(1);
+}
+
+.home-icon {
+  position: absolute;
+  left: 38rpx;
+  width: 36rpx;
+  height: 36rpx;
+}

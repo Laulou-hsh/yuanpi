@@ -1,0 +1,172 @@
+/* eslint-disable */
+var regYear = getRegExp('(y+)', 'i')
+
+var tool = {
+  relativetime: function(timestamp) {
+    var date, returnString
+
+    if (typeof timestamp === 'number') {
+      date = getDate(timestamp * 1000)
+    } else {
+      return
+    }
+
+    timestamp = date.getTime()
+
+    var currentDate = getDate()
+    var currentStamp = currentDate.getTime()
+
+    var distanceMillis = currentStamp - timestamp
+
+    var seconds = Math.floor(Math.abs(distanceMillis) / 1000)
+    var minutes = Math.floor(seconds / 60)
+    var hours = Math.floor(seconds / 3600)
+    var days = currentDate.getDate() - date.getDate()
+    var ABSOLUTE_ONE_DAY_SECONDS = 86400
+    var ABSOLUTE_TWO_DAY_SECONDS = 172800
+    var ABSOLUTE_THREE_DAY_SECONDS = 259200
+
+    // if more than a day
+    if (seconds >= ABSOLUTE_ONE_DAY_SECONDS) {
+      // day distance is 1, in the same month, the same year
+      if (days == 1 && seconds < ABSOLUTE_TWO_DAY_SECONDS) {
+        returnString = '昨天 ' + tool.formatTime(date, 'short')
+      } else if (days == 2 && seconds < ABSOLUTE_THREE_DAY_SECONDS) {
+        returnString = '前天 ' + tool.formatTime(date, 'short')
+      } else {
+        returnString = tool.formatTime(date)
+      }
+    }
+    // if more than an hour ago 60*60
+    else if (seconds >= 3600) {
+      returnString = hours + ' 小时前'
+    }
+    // if more than a minute ago
+    else if (seconds >= 60) {
+      returnString = minutes + ' 分钟前'
+    }
+    // if less than a minute ago
+    else {
+      returnString = '刚刚'
+    }
+
+    return returnString
+  },
+
+  formatTime: function(date, type) {
+    if (typeof date === 'undefined') return ''
+    if (typeof date === 'number') {
+      date = getDate(date * 1000)
+    }
+    var currentYear = getDate().getFullYear()
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var min = date.getMinutes() + ''
+    var dateString
+
+    if (('' + min).length == 1) min = '0' + min
+
+    switch (type) {
+      case 'short':
+        dateString = hour + ':' + min
+        break
+      case 'withNoYear':
+        dateString = month + '月' + day + '日 ' + hour + ':' + min
+        if (year != currentYear) {
+          dateString = year + '年' + dateString
+        }
+        break
+      case 'onlyMonthDay':
+        if (('' + month).length == 1) month = '0' + month
+        if (('' + day).length == 1) day = '0' + day
+        dateString = month + '/' + day
+        break
+      default:
+        dateString = year + '年' + month + '月' + day + '日 ' + hour + ':' + min
+        break
+    }
+    return dateString
+  },
+
+  dateFormat: function(timestamp, format) {
+    if (!format) {
+      format = 'yyyy-MM-dd hh:mm:ss'
+    }
+    if (typeof timestamp === 'number') {
+      timestamp = parseInt(timestamp * 1000)
+    } else {
+      timestamp = getDate(timestamp).getTime()
+    }
+    var realDate = getDate(timestamp)
+    function timeFormat(num) {
+      return num < 10 ? '0' + num : num
+    }
+    var date = [
+      ['M+', timeFormat(realDate.getMonth() + 1)],
+      ['d+', timeFormat(realDate.getDate())],
+      ['h+', timeFormat(realDate.getHours())],
+      ['m+', timeFormat(realDate.getMinutes())],
+      ['s+', timeFormat(realDate.getSeconds())],
+      ['q+', Math.floor((realDate.getMonth() + 3) / 3)],
+      ['S+', realDate.getMilliseconds()],
+    ]
+    var reg1 = regYear.exec(format)
+    // console.log(reg1[0]);
+    if (reg1) {
+      format = format.replace(
+        reg1[1],
+        (realDate.getFullYear() + '').substring(4 - reg1[1].length)
+      )
+    }
+    for (var i = 0; i < date.length; i++) {
+      var k = date[i][0]
+      var v = date[i][1]
+
+      var reg2 = getRegExp('(' + k + ')').exec(format)
+      if (reg2) {
+        format = format.replace(
+          reg2[1],
+          reg2[1].length == 1 ? v : ('00' + v).substring(('' + v).length)
+        )
+      }
+    }
+    return format
+  },
+
+  includes: function(array, searchElement) {
+    if (array) {
+      return array.indexOf(searchElement) !== -1
+    }
+
+    return false
+  },
+
+  getTypeof: function(item) {
+    return typeof item
+  },
+
+  fixedZero: function(val) {
+    return val * 1 < 10 ? '0' + val : val;
+  },
+
+  numberToFixed: function(number, pos) {
+    if (number === null || number === '' || number < 0) return ''
+    return parseFloat(number).toFixed(pos)
+  },
+
+  slice: function(array, begin, end) {
+    return array.slice(begin, end)
+  },
+
+  padStart: function(str, maxLength, fillString) {
+    str = '' + str
+    while (str.length < maxLength) {
+      str = fillString + str
+    }
+    return str
+  },
+}
+
+module.exports = tool

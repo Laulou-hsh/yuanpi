@@ -1,0 +1,20 @@
+.container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 60rpx;
+}
+
+.banner {
+  width: 100vw;
+  height: 300rpx;
+  margin: 36rpx;
+}
+
+.title {
+  max-width: 400rpx;
+  font-weight: 600;
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+}

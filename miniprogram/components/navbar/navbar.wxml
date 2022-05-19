@@ -1,0 +1,11 @@
+<view wx:if="{{active}}" class="container container-class {{isFixed ? 'fixed' : ''}}" style="height: {{placeholder ? navBarHeight : '0'}}px;">
+  <view class="navbar fixed" style="height: {{navBarHeight}}px; padding-top: {{statusBarHeight}}px; background-color: {{backgroundColor}}; background-image: {{backgroundImage}}; transition-duration: {{fadeDuration}}ms; transition-timing-function: {{fadeTimingFunc}}">
+    <image wx:if="{{onlyShowBtn}}" class="back-icon{{whiteArraw?' white':''}}" src="{{iconBack}}" catchtap="navBack" />
+    <image wx:elif="{{showBackBtn && !showHomeBtn}}" class="back-icon{{whiteArraw?' white':''}}" src="../../assets/images/back-{{frontColor}}.png" catchtap="navBack" />
+    <image wx:elif="{{showBackBtn && showHomeBtn}}" class="home-icon" src="../../assets/images/home-{{homeColor}}.png" catchtap="navToIndex" />
+    <view wx:if="{{title}}" class="title" style="color: {{titleColor}};">{{title}}</view>
+    <view wx:else>
+      <slot />
+    </view>
+  </view>
+</view>

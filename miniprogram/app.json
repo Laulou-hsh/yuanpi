@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/getOpenId/index",
+    "pages/getMiniProgramCode/index",
+    "pages/deployService/index",
+    "pages/createCollection/index",
+    "pages/uploadFile/index",
+    "pages/selectRecord/index",
+    "pages/updateRecord/index",
+    "pages/updateRecordResult/index",
+    "pages/updateRecordSuccess/index",
+    "pages/sumRecord/index",
+    "pages/sumRecordResult/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "原批内鬼消息"
+  },
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar"
+  },
+  "subpackages": [
+    {
+      "root": "version/2.8",
+      "pages": ["inside-information/inside-information"]
+    }
+  ],
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
