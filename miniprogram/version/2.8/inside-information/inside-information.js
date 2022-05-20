@@ -1,3 +1,5 @@
+import config from '../../../config/config'
+
 const { envList } = require('../../../envList');
 
 Component({
@@ -21,6 +23,8 @@ Component({
 
     onShow() {
       this.getInsideInformation()
+      const url = config.getCurrentPageUrl()
+      this.setData({url})
     },
 
     // 获取信息
@@ -55,6 +59,15 @@ Component({
         urls: imgs,
         showmenu: true,
       })
+    },
+
+    onShareAppMessage() {
+      const {content, version, serial_number, url} = this.data
+      return {
+        title: content.title,
+        path: url + `?version=${version}&serialNumber=${serial_number}`,
+        imageUrl: content.message[0].img
+      }
     },
   },
 })

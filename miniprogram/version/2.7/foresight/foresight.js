@@ -1,16 +1,21 @@
+import config from '../../../config/config'
+
 const { envList } = require('../../../envList');
 
 Component({
   data: {
     envList,
     selectedEnv: envList[0],
+    version: 1.0,
     serial_number: null,
     content: {},
     imgs: [],
+    url: '',
   }, 
 
   methods: {
     onLoad(options) {
+      console.log(options)
       const {serialNumber, version} = options
       this.setData({serial_number: Number(serialNumber), version : Number(version)})
       wx.showLoading({
@@ -21,6 +26,9 @@ Component({
 
     onShow() {
       this.getInsideInformation()
+      const url = config.getCurrentPageUrl()
+      this.setData({url})
+      console.log(url)
     },
 
     // 获取信息
@@ -55,6 +63,15 @@ Component({
         urls: imgs,
         showmenu: true,
       })
+    },
+
+    onShareAppMessage() {
+      const {content, version, serial_number, url} = this.data
+      return {
+        title: content.title,
+        path: url + `?version=${version}&serialNumber=${serial_number}`,
+        imageUrl: content.message[0].img
+      }
     },
   },
 })
