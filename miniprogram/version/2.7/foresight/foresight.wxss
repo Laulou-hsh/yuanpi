@@ -35,8 +35,8 @@
   width: 100%;
 }
 
-
 .description {
+  width: 100%;
   display: flex;
   letter-spacing: 4rpx;
   margin-bottom: 30rpx;

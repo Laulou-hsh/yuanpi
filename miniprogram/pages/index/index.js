@@ -55,6 +55,11 @@ Page({
 
   toInsideInformation(e) {
     const {news} = e.currentTarget.dataset
-    wx.navigateTo({url: ROUTE.INSIDE_INFORMATION_2_8 + `?id=${news._id}&priority=${news.priority}`})
+    if (news.inner && !news.foresight) {
+      wx.navigateTo({url: `/version/${news.version}` + ROUTE.INSIDE_INFORMATION + `?version=${news.version}&serialNumber=${news.serial_number}`})
+    } else if (!news.inner && news.foresight) {
+      wx.navigateTo({url: `/version/${news.version}` + ROUTE.FORESIGHT + `?version=${news.version}&serialNumber=${news.serial_number}`})
+    }
+
   },
 });

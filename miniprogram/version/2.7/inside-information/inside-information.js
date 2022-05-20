@@ -11,6 +11,7 @@ Component({
 
   methods: {
     onLoad(options) {
+      console.log(options)
       const {serialNumber, version} = options
       this.setData({serial_number: Number(serialNumber), version : Number(version)})
       wx.showLoading({

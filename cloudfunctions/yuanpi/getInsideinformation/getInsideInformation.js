@@ -11,7 +11,8 @@ exports.main = async (event, context) => {
   // 返回数据库查询结果
   return await db.collection('inside-information')
                   .where({
-                    priority: _.eq(event.priority)
+                    serial_number: _.eq(event.serial_number),
+                    version: _.eq(event.version)
                   })
                   .field({
                     banner: true,
