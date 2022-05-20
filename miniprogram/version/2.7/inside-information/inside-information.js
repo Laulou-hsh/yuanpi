@@ -42,7 +42,7 @@ Component({
         const imgs = []
         const {message} = resp.result.data[0]
         message.forEach(item => {
-          imgs.push(item.img)
+          if (item.img) imgs.push(item.img)
         })
         this.setData({content: resp.result.data[0], imgs})
         wx.setNavigationBarTitle({title: this.data.version + ' 内鬼消息'})

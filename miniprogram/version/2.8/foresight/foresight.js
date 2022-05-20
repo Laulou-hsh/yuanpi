@@ -44,7 +44,7 @@ Component({
           if (item.img) imgs.push(item.img)
         })
         this.setData({content: resp.result.data[0], imgs})
-        wx.setNavigationBarTitle({title: this.data.version + ' 内鬼消息'})
+        wx.setNavigationBarTitle({title: this.data.version + ' 前瞻消息'})
       }).catch(err => {
         console.log(err)
       }).finally(() => {

@@ -35,9 +35,10 @@
   width: 100%;
 }
 
-
 .description {
+  width: 100%;
   display: flex;
+  text-align: left;
   letter-spacing: 4rpx;
   margin-bottom: 30rpx;
 }

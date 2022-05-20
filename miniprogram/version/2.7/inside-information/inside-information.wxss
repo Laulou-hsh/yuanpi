@@ -37,6 +37,7 @@
 
 .description {
   width: 100%;
+  text-align: left;
   display: flex;
   letter-spacing: 4rpx;
   margin-bottom: 30rpx;
