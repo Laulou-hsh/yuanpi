@@ -60,6 +60,13 @@ Page({
     } else if (!news.inner && news.foresight) {
       wx.navigateTo({url: `/version/${news.version}` + ROUTE.FORESIGHT + `?version=${news.version}&serialNumber=${news.serial_number}`})
     }
+  },
 
+  onShareAppMessage() {
+    return {
+      title: '原批内鬼消息',
+      path: '/pages/index/index',
+      imageUrl: 'cloud://huangsihao-ax48l.6875-huangsihao-ax48l-1302513604/Index/index_2.6_tiny.png'
+    }
   },
 });
