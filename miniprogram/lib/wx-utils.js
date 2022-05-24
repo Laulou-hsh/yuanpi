@@ -187,6 +187,11 @@ const wxUtils = {
     if (!wx.getUpdateManager) return
 
     const updateManager = wx.getUpdateManager()
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      if (res.hasUpdate) return
+    })
+
     updateManager.onUpdateReady(() => {
       wx.showModal({
         showCancel,
@@ -194,6 +199,18 @@ const wxUtils = {
         content: '新版本已下载，立即重启应用？',
         success: res => {
           if (res.confirm) updateManager.applyUpdate()
+        },
+      })
+    })
+
+    updateManager.onUpdateFailed(function () {
+      // 新版本下载失败
+      wx.showModal({
+        showCancel,
+        title: '小程序更新提示',
+        content: '更新失败，请稍后重试',
+        success: res => {
+          if (res.confirm) wx.exitMiniProgram()
         },
       })
     })
