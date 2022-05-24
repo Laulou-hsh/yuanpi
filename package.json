@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.18.1",
+    "npm": "^8.10.0",
+    "yarn": "^1.22.18"
+  },
+  "name": "yuanpi",
+  "description": "不定期更新",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laulou-hsh/yuanpi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Laulou-hsh/yuanpi/issues"
+  },
+  "homepage": "https://github.com/Laulou-hsh/yuanpi#readme"
+}
