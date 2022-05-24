@@ -1,4 +1,5 @@
-// app.js
+import wxUtils from './lib/wx-utils'
+
 App({
   onLaunch: function () {
     if (!wx.cloud) {
@@ -13,6 +14,8 @@ App({
         traceUser: true,
       });
     }
+
+    wxUtils.checkUpdateManager()
 
     this.globalData = {};
   }
