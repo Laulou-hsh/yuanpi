@@ -37,8 +37,12 @@
 
 .description {
   width: 100%;
-  text-align: left;
   display: flex;
+  text-align: left;
   letter-spacing: 4rpx;
   margin-bottom: 30rpx;
+}
+
+.video {
+  width: 100%;
 }

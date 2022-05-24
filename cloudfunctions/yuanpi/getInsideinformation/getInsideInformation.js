@@ -1,9 +1,9 @@
-const cloud = require('wx-server-sdk');
+const cloud = require('wx-server-sdk')
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
-});
-const db = cloud.database();
+})
+const db = cloud.database()
 const _ = db.command
 
 // 查询数据库集合云函数入口函数
@@ -18,6 +18,9 @@ exports.main = async (event, context) => {
                     banner: true,
                     message: true,
                     title: true,
+                    foresight: true,
+                    inner: true,
+                    json: true,
                   })
                   .get()
 };

@@ -1,6 +1,5 @@
 export const ROUTE = {
-  FORESIGHT: '/pages/foresight/foresight',
-  INSIDE_INFORMATION: '/pages/inside-information/inside-information',
+  NEWS: '/pages/news/news',
 }
 
 export default {

@@ -2,7 +2,7 @@
   <image class="banner" src="{{content.banner}}" mode="widthFix"/>
   <view class="title">{{content.title}}</view>
   <view class="messages">
-    <view class="msg" wx:for="{{content.message}}" wx:key="index">
+    <view class="msg" wx:for="{{message}}" wx:key="index">
       <text wx:if="{{item.description}}" class="description" space="ensp">    {{item.description}}</text>
       <image 
         class="msg-img" 
@@ -13,7 +13,9 @@
         data-img="{{item.img}}"
       />
       <video 
+        id="inner"
         wx:if="{{item.video}}" 
+        class="video"
         src="{{item.video}}" 
         direction="90" 
         poster="{{item.img}}" 

@@ -1,4 +1,5 @@
 import config from '../../config/config'
+import wxUtils from '../../lib/wx-utils'
 
 const { envList } = require('../../envList');
 
@@ -9,23 +10,23 @@ Component({
     serial_number: null,
     content: {},
     imgs: [],
-    url: '',
   }, 
 
   methods: {
     onLoad(options) {
       const {serialNumber, version} = options
       this.setData({serial_number: Number(serialNumber), version : Number(version)})
-      wx.showLoading({
-        title: '加载中',
-        mask: true,
-      })
+      wx.showLoading({title: '加载中', mask: true})
     },
 
-    async onShow() {
+    onShow() {
       this.getInsideInformation()
       const url = config.getCurrentPageUrl()
       this.setData({url})
+    },
+
+    onReady() {
+      this.videoContext = wx.createVideoContext('inner')
     },
 
     // 获取信息
@@ -37,18 +38,21 @@ Component({
           env: this.data.selectedEnv.envId
         },
         data: {type: 'getInsideInformation', serial_number, version}
-      }).then(resp => {
+      }).then(async resp => {
         const imgs = []
-        const {message} = resp.result.data[0]
+        const content = resp.result.data[0]
+        const result = await wxUtils.request({url: content.json})
+        const {message} = result.data
         message.forEach(item => {
           if (item.img) imgs.push(item.img)
         })
-        this.setData({content: resp.result.data[0], imgs})
-        wx.setNavigationBarTitle({title: this.data.version + ' 前瞻消息'})
+        this.setData({content, imgs, message})
+        wx.setNavigationBarTitle({title: this.data.version + `${content.inner ? ' 内鬼消息' : ' 前瞻消息'}`})
+        wx.hideLoading()
       }).catch(err => {
         console.log(err)
-      }).finally(() => {
         wx.hideLoading()
+        wxUtils.showToast('加载错误，请稍后重试')
       })
     },
 
@@ -60,6 +64,11 @@ Component({
         urls: imgs,
         showmenu: true,
       })
+      this.bindPlayVideo()
+    },
+
+    bindPlayVideo() {
+      this.videoContext.pause()
     },
 
     onShareAppMessage() {
@@ -67,7 +76,7 @@ Component({
       return {
         title: content.title,
         path: url + `?version=${version}&serialNumber=${serial_number}`,
-        imageUrl: content.message[0].img
+        imageUrl: content.message[0].img || "https://6875-huangsihao-ax48l-1302513604.tcb.qcloud.la/Share/%E5%86%85%E9%AC%BC%E6%B6%88%E6%81%AF_tiny.png?sign=93bfa176fb94dcaa8a0e402241427288&t=1653382081"
       }
     },
   },
