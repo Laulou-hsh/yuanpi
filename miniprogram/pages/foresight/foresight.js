@@ -1,6 +1,6 @@
-import config from '../../../config/config'
+import config from '../../config/config'
 
-const { envList } = require('../../../envList');
+const { envList } = require('../../envList');
 
 Component({
   data: {
@@ -14,7 +14,6 @@ Component({
 
   methods: {
     onLoad(options) {
-      console.log(options)
       const {serialNumber, version} = options
       this.setData({serial_number: Number(serialNumber), version : Number(version)})
       wx.showLoading({
@@ -23,7 +22,7 @@ Component({
       })
     },
 
-    onShow() {
+    async onShow() {
       this.getInsideInformation()
       const url = config.getCurrentPageUrl()
       this.setData({url})
@@ -45,7 +44,7 @@ Component({
           if (item.img) imgs.push(item.img)
         })
         this.setData({content: resp.result.data[0], imgs})
-        wx.setNavigationBarTitle({title: this.data.version + ' 内鬼消息'})
+        wx.setNavigationBarTitle({title: this.data.version + ' 前瞻消息'})
       }).catch(err => {
         console.log(err)
       }).finally(() => {

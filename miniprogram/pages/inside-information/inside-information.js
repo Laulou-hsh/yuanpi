@@ -1,6 +1,6 @@
-import config from '../../../config/config'
+import config from '../../config/config'
 
-const { envList } = require('../../../envList');
+const { envList } = require('../../envList');
 
 Component({
   data: {

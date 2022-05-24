@@ -1,6 +1,6 @@
 export const ROUTE = {
-  FORESIGHT: '/foresight/foresight',
-  INSIDE_INFORMATION: '/inside-information/inside-information',
+  FORESIGHT: '/pages/foresight/foresight',
+  INSIDE_INFORMATION: '/pages/inside-information/inside-information',
 }
 
 export default {

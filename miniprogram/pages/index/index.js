@@ -15,9 +15,29 @@ Page({
     wx.showLoading({title: ''})
   },
 
-  onShow() {
+  async onShow() {
     this.getSwiper()
     this.getInsideInformationList()
+
+    const res = await wx.cloud.callContainer({
+      path: "/get_number",
+      method: "POST",
+      data: {
+        //如果你想传数据，在这里
+      },
+      header: {
+        // 服务名字要在这里标明，可以针对于每个服务单独创建API类，具体按照自身业务实现
+        'X-WX-SERVICE': 'aaa'
+      },
+      config: {
+        // 微信云托管环境，注意不是云开发环境
+        env: "prod-7gmywgq0e5d3cb1a"
+      }
+    })
+    console.log(res)
+    this.setData({
+      num: res.data.number
+    })
   },
 
   // 获取swiper
@@ -56,9 +76,9 @@ Page({
   toInsideInformation(e) {
     const {news} = e.currentTarget.dataset
     if (news.inner && !news.foresight) {
-      wx.navigateTo({url: `/version/${news.version}` + ROUTE.INSIDE_INFORMATION + `?version=${news.version}&serialNumber=${news.serial_number}`})
+      wx.navigateTo({url: ROUTE.INSIDE_INFORMATION + `?version=${news.version}&serialNumber=${news.serial_number}`})
     } else if (!news.inner && news.foresight) {
-      wx.navigateTo({url: `/version/${news.version}` + ROUTE.FORESIGHT + `?version=${news.version}&serialNumber=${news.serial_number}`})
+      wx.navigateTo({url: ROUTE.FORESIGHT + `?version=${news.version}&serialNumber=${news.serial_number}`})
     }
   },
 

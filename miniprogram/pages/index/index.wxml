@@ -25,4 +25,7 @@
       <view class="news-date">{{tool.dateFormat(item.date, 'YYYY-MM-dd hh:mm')}}</view>
     </view>
   </view>
+  <view class="">
+    {{num}}
+  </view>
 </view>
