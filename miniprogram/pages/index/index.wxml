@@ -15,7 +15,7 @@
   <view class="news-content">
     <view 
       class="news" 
-      wx:for="{{newsData}}" 
+      wx:for="{{showedNewsData}}" 
       wx:key="id"
       bind:tap="toInsideInformation" 
       data-news="{{item}}"

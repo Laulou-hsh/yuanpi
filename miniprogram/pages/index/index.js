@@ -1,4 +1,5 @@
 import {ROUTE} from '../../config/config'
+import {chunk} from '../../lib/licia'
 
 // const app = getApp()
 const { envList } = require('../../envList.js');
@@ -9,11 +10,13 @@ Component({
     selectedEnv: envList[0],
     swiperData: [],
     newsData: [],
+    showedNewsData: [],
+    pageIndex: 0,
   },
 
   methods: {
     async onLoad() {
-      wx.showLoading({title: ''})
+      wx.showLoading({title: '加载中', mask: true})
       // const res = await wx.cloud.callContainer({
       //   path: "/get_number",
       //   method: "POST",
@@ -64,16 +67,44 @@ Component({
         data: {type: 'getInsideInformationList', isShow: true}
       }).then(resp => {
         if(resp.result) this.setData({newsData: resp.result.data})
+        this.onReachBottom()
       }).catch(err => {
+        wx.stopPullDownRefresh()
         console.log(err)
       }).finally(() => {
         wx.hideLoading()
+        wx.stopPullDownRefresh()
       })
     },
 
     toInsideInformation(e) {
       const {news} = e.currentTarget.dataset
       wx.navigateTo({url: ROUTE.NEWS + `?version=${news.version}&serialNumber=${news.serial_number}`})
+    },
+
+    // 下拉刷新
+    onPullDownRefresh() {
+      wx.showLoading({title: '加载中', mask: true})
+      this.getInsideInformationList()
+      const {newsData} = this.data
+      this.setData({showedNewsData: chunk(newsData, 3), pageIndex: 0})
+    },
+
+    // 触底加载
+    onReachBottom() {
+      let {newsData, showedNewsData, pageIndex} = this.data
+      const selectedNewsData = chunk(newsData, 3)
+      const selectedNewsDataLen = selectedNewsData.length
+      let pageNum = pageIndex
+
+      if (pageNum >= selectedNewsDataLen) return
+
+      if (showedNewsData && pageNum >= 1) showedNewsData.push(...selectedNewsData[pageIndex])
+      else showedNewsData = selectedNewsData[pageNum]
+
+      pageNum += 1
+
+      this.setData({showedNewsData, pageIndex: pageNum})
     },
 
     onShareAppMessage() {
