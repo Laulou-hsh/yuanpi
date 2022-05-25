@@ -8,10 +8,11 @@
         class="msg-img" 
         wx:if="{{item.img}}"
         src="{{item.img}}" 
-        mode="aspectFit" 
+        mode="widthFix" 
         catch:tap="previewImage" 
         data-img="{{item.img}}"
       />
+
       <video 
         id="inner"
         wx:if="{{item.video}}" 

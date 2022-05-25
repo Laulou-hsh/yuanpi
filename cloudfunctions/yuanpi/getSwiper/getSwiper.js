@@ -8,5 +8,5 @@ const db = cloud.database()
 // 查询数据库集合云函数入口函数
 exports.main = async (event, context) => {
   // 返回数据库查询结果
-  return await db.collection('swiper').limit(2).orderBy('priority', 'desc').get()
+  return await db.collection('swiper').limit(3).orderBy('priority', 'desc').get()
 };

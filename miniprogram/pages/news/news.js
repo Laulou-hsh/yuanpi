@@ -31,7 +31,7 @@ Component({
 
     // 获取信息
     getInsideInformation() {
-      const {serial_number, version} =this.data
+      const {serial_number, version} = this.data
       wx.cloud.callFunction({
         name: 'yuanpi',
         config: {
@@ -44,7 +44,7 @@ Component({
         const result = await wxUtils.request({url: content.json})
         const {message} = result.data
         message.forEach(item => {
-          if (item.img) imgs.push(item.img)
+          if (item?.img) imgs.push(item.img)
         })
         this.setData({content, imgs, message})
         wx.setNavigationBarTitle({title: this.data.version + `${content.inner ? ' 内鬼消息' : ' 前瞻消息'}`})
@@ -72,11 +72,11 @@ Component({
     },
 
     onShareAppMessage() {
-      const {content, version, serial_number, url} = this.data
+      const {content, message ,version, serial_number, url} = this.data
       return {
-        title: content.title,
+        title: content?.title || '内鬼消息',
         path: url + `?version=${version}&serialNumber=${serial_number}`,
-        imageUrl: content.message[0].img || "https://6875-huangsihao-ax48l-1302513604.tcb.qcloud.la/Share/%E5%86%85%E9%AC%BC%E6%B6%88%E6%81%AF_tiny.png?sign=93bfa176fb94dcaa8a0e402241427288&t=1653382081"
+        imageUrl: message[0]?.img || "https://6875-huangsihao-ax48l-1302513604.tcb.qcloud.la/Share/%E5%86%85%E9%AC%BC%E6%B6%88%E6%81%AF_tiny.png?sign=93bfa176fb94dcaa8a0e402241427288&t=1653382081"
       }
     },
   },
