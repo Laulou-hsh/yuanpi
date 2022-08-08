@@ -12,18 +12,6 @@
         catch:tap="previewImage" 
         data-img="{{item.img}}"
       />
-
-      <video 
-        id="inner"
-        wx:if="{{item.video}}" 
-        class="video"
-        src="{{item.video}}" 
-        direction="90" 
-        poster="{{item.img}}" 
-        play-btn-position="center" 
-        enable-play-gesture="true"
-        vslide-gesture="true"
-      />
     </view>
   </view>
 </view>
