@@ -14,6 +14,7 @@ exports.main = async (event, context) => {
                     serial_number: _.eq(event.serial_number),
                     version: _.eq(event.version)
                   })
+                  .limit(3)
                   .field({
                     banner: true,
                     message: true,
