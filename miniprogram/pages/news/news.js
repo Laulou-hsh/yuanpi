@@ -15,7 +15,7 @@ Component({
   methods: {
     onLoad(options) {
       const {serialNumber, version} = options
-      this.setData({serial_number: Number(serialNumber), version : version})
+      this.setData({serial_number: Number(serialNumber), version})
       wx.showLoading({title: '加载中', mask: true})
     },
 
