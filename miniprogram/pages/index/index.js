@@ -15,25 +15,8 @@ Component({
   },
 
   methods: {
-    async onLoad() {
+    onLoad() {
       wx.showLoading({title: '加载中', mask: true})
-      // const res = await wx.cloud.callContainer({
-      //   path: "/get_number",
-      //   method: "POST",
-      //   data: {
-      //     //如果你想传数据，在这里
-      //   },
-      //   header: {
-      //     // 服务名字要在这里标明，可以针对于每个服务单独创建API类，具体按照自身业务实现
-      //     'X-WX-SERVICE': 'aaa'
-      //   },
-      //   config: {
-      //     // 微信云托管环境，注意不是云开发环境
-      //     env: "prod-7gmywgq0e5d3cb1a"
-      //   }
-      // })
-      // console.log(res)
-      // this.setData({num: res.data.number})
     },
   
     onShow() {

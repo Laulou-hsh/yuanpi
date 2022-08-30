@@ -15,7 +15,7 @@ Component({
   methods: {
     onLoad(options) {
       const {serialNumber, version} = options
-      this.setData({serial_number: Number(serialNumber), version : Number(version)})
+      this.setData({serial_number: Number(serialNumber), version : version})
       wx.showLoading({title: '加载中', mask: true})
     },
 
@@ -23,10 +23,6 @@ Component({
       this.getInsideInformation()
       const url = config.getCurrentPageUrl()
       this.setData({url})
-    },
-
-    onReady() {
-      this.videoContext = wx.createVideoContext('inner')
     },
 
     // 获取信息
